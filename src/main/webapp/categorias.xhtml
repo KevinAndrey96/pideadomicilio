@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+                        <p:panel header="Administrar Categorias" style="margin-bottom:20px">
+                            <p:dataTable var="obj" value="#{dataService.categoriaList}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{obj.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.editCategoria(obj)}"
+                                                     icon="ui-icon-pencil" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.removeCategoria(obj)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Categoria"
+                                                     actionListener="#{homeBean.nuevaCategoria()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.categoria != null}">
+                            <f:facet name="header">
+                                Nueva Categoria
+                            </f:facet>
+
+                            <h:outputText value="Categoria:"/>
+                            <p:inputText value="#{homeBean.categoria.nombre}"/>
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Categoria"
+                                             actionListener="#{homeBean.guardarCategoria}"/>
+
+
+                        </p:panelGrid>
+
+
+
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

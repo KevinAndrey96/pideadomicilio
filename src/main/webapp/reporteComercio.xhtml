@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+                        <p:panel header="Reporte Comercios" style="margin-bottom:20px">
+                            <p:dataTable var="obj2" value="#{dataService.comercioList}" id="dt" paginator="true" rows="10" >
+                                <p:column headerText="Orden">
+                                    <h:outputText value="#{obj2.peso}"/>
+                                </p:column>
+
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj2.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Zona">
+                                    <h:outputText value="#{obj2.zona.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Ciudad">
+                                    <h:outputText value="#{obj2.zona.ciudad.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Direccion">
+                                    <h:outputText value="#{obj2.direccion}"/>
+                                </p:column>
+
+                                <p:column headerText="Tags">
+                                    <h:outputText value="#{obj2.tags}"/>
+                                </p:column>
+
+                                <p:column headerText="Url">
+                                    <h:outputText value="#{obj2.url}"/>
+                                </p:column>
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{obj2.categoria.nombre}"/>
+                                </p:column>
+
+
+                            </p:dataTable>
+                        </p:panel>
+
+                        <h:commandLink value="Descargar Reporte">
+
+                            <p:dataExporter type="xlsx" target="dt" fileName="listaComercios" pageOnly="false"/>
+                        </h:commandLink>
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+
+
+                        <p:panel header="Administrar Zonas" style="margin-bottom:20px">
+                            <p:dataTable var="obj1" value="#{dataService.zonaList}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{obj1.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj1.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Ciudad">
+                                    <h:outputText value="#{obj1.ciudad.nombre}"/>
+                                </p:column>
+
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.editZona(obj1)}"
+                                                     icon="ui-icon-pencil" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.removeZona(obj1)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Zonas"
+                                                     actionListener="#{homeBean.nuevaZona()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.zona != null}">
+                            <f:facet name="header">
+                                Nueva Zona
+                            </f:facet>
+
+                            <h:outputText value="Zona:"/>
+                            <p:inputText value="#{homeBean.zona.nombre}"/>
+
+
+                            <h:outputText value="Ciudad:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.zona.ciudad}"
+                                            completeMethod="#{dataService.completeTextCiudades}" required="true"
+                                            var="acob" itemLabel="#{acob.nombre}" itemValue="#{acob}"
+                                            converter="ciudadConverter" forceSelection="true"
+                                    />
+
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Zona"
+                                             actionListener="#{homeBean.guardarZona}"/>
+
+
+                        </p:panelGrid>
+
+
+
+
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

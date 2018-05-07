@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+                            <p:dataTable var="obj3" value="#{adminBean.userList}" paginator="true" rows="10" paginatorPosition="top"
+                                         reflow="true">
+
+
+                                <p:column headerText="Usuario" filterBy="#{obj3.username}" filterMatchMode="contains">
+                                    <h:outputText value="#{obj3.username}"/>
+                                </p:column>
+
+                                <p:column headerText="Rol">
+                                    <h:outputText value="#{obj3.role}"/>
+                                </p:column>
+
+
+
+                                <p:column styleClass="dw-column">
+                                    <p:commandButton update="form" actionListener="#{adminBean.edituser(obj3)}"
+                                                     icon="ui-icon-pencil" title="View" oncomplete="PF('dlg').show();">
+
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column styleClass="dw-column">
+                                    <p:commandButton update="form" actionListener="#{adminBean.remove(obj3)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Usuario" oncomplete="PF('dlg').show();"
+                                                     actionListener="#{adminBean.addUser()}"/>
+                                </f:facet>
+                            </p:dataTable>
+
+                        <p:dialog id="dialog2"  widgetVar="dlg" modal="true" draggable="false"
+                                  height="250" closable="false" resizable="false">
+
+                            <p:panelGrid columns="2" rendered="#{adminBean.user != null}" id="nuevoUser">
+                                <f:facet name="header">
+                                    Datos de Usuario
+                                </f:facet>
+
+                                <h:outputText value="Usuario:" rendered="#{not adminBean.editable}"/>
+                                <p:inputText value="#{adminBean.user.username}" rendered="#{not adminBean.editable}"/>
+
+                                <h:outputText value="Password:"/>
+                                <p:password value="#{adminBean.user.password}"/>
+
+                                <h:outputText value="Role:"/>
+                                <p:selectOneMenu id="rol" value="#{adminBean.user.role}" style="width:125px">
+                                    <f:selectItem itemLabel="USUARIO" itemValue="USUARIO"/>
+                                    <f:selectItem itemLabel="ADMIN" itemValue="ADMIN"/>
+
+                                </p:selectOneMenu>
+
+
+
+                                <p:commandButton update="form" icon="ui-icon-add" value="Guardar"  oncomplete="PF('dlg').hide();"
+                                                 actionListener="#{adminBean.saveUsuario}"/>
+                                <p:commandButton update="form" icon="ui-icon-add" value="Cancelar"  oncomplete="PF('dlg').hide();"
+                                                 actionListener="#{adminBean.cancelar}"/>
+
+
+                            </p:panelGrid>
+                        </p:dialog>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

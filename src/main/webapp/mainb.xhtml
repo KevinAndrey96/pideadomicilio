@@ -1,0 +1,364 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+                        <p:panel header="Administrar Categorias" style="margin-bottom:20px">
+                            <p:dataTable var="obj" value="#{dataService.categoriaList}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{obj.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Categoria"
+                                                     actionListener="#{homeBean.nuevaCategoria()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.categoria != null}">
+                            <f:facet name="header">
+                                Nueva Categoria
+                            </f:facet>
+
+                            <h:outputText value="Categoria:"/>
+                            <p:inputText value="#{homeBean.categoria.nombre}"/>
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Categoria"
+                                             actionListener="#{homeBean.guardarCategoria}"/>
+
+
+                        </p:panelGrid>
+
+                        <p:panel header="Administrar Ciudades" style="margin-bottom:20px">
+                            <p:dataTable var="obj" value="#{dataService.ciudadList}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{obj.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Ciudad"
+                                                     actionListener="#{homeBean.nuevaCiudad()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.ciudad != null}">
+                            <f:facet name="header">
+                                Nueva Ciudad
+                            </f:facet>
+
+                            <h:outputText value="Ciudad:"/>
+                            <p:inputText value="#{homeBean.ciudad.nombre}"/>
+                            <h:outputText value="Indicativo:"/>
+                            <p:inputText value="#{homeBean.ciudad.indicativo}"/>
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Ciudad"
+                                             actionListener="#{homeBean.guardarCiudad}"/>
+
+
+                        </p:panelGrid>
+
+                        <p:panel header="Administrar Zonas" style="margin-bottom:20px">
+                            <p:dataTable var="obj1" value="#{dataService.zonaList}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{obj1.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj1.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Ciudad">
+                                    <h:outputText value="#{obj1.ciudad.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj1)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Zonas"
+                                                     actionListener="#{homeBean.nuevaZona()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.zona != null}">
+                            <f:facet name="header">
+                                Nueva Zona
+                            </f:facet>
+
+                            <h:outputText value="Zona:"/>
+                            <p:inputText value="#{homeBean.zona.nombre}"/>
+
+
+                            <h:outputText value="Ciudad:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.zona.ciudad}"
+                                            completeMethod="#{dataService.completeTextCiudades}" required="true"
+                                            var="acob" itemLabel="#{acob.nombre}" itemValue="#{acob}"
+                                            converter="ciudadConverter" forceSelection="true"
+                                    />
+
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Zona"
+                                             actionListener="#{homeBean.guardarZona}"/>
+
+
+                        </p:panelGrid>
+
+
+                        <p:panel header="Administrar Comercios" style="margin-bottom:20px">
+                            <p:dataTable var="obj2" value="#{dataService.comercioList}">
+                                <p:column headerText="Orden">
+                                    <h:outputText value="#{obj2.peso}"/>
+                                </p:column>
+
+                                <p:column headerText="Logo">
+                                    <p:graphicImage url="#{obj2.img}" width="100%" />
+
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj2.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Zona">
+                                    <h:outputText value="#{obj2.zona.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Ciudad">
+                                    <h:outputText value="#{obj2.zona.ciudad.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Direccion">
+                                    <h:outputText value="#{obj2.direccion}"/>
+                                </p:column>
+
+                                <p:column headerText="Url">
+                                    <h:outputText value="#{obj2.url}"/>
+                                </p:column>
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{obj2.categoria.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj2)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Comercio"
+                                                     actionListener="#{homeBean.nuevoComercio()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.comercio != null}" id="nuevoComercio">
+                            <f:facet name="header">
+                                Nuevo Comercio
+                            </f:facet>
+
+                            <h:outputText value="Comercio:"/>
+                            <p:inputText value="#{homeBean.comercio.nombre}"/>
+
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{homeBean.comercio.direccion}"/>
+
+                            <h:outputText value="Url:"/>
+                            <p:inputText value="#{homeBean.comercio.url}"/>
+
+
+                            <h:outputText value="Zona:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.comercio.zona}"
+                                            completeMethod="#{dataService.completeTextZonas}" required="true"
+                                            var="acob" itemLabel="#{acob.ciudad.nombre} #{acob.nombre}"
+                                            itemValue="#{acob}" converter="zonaConverter" forceSelection="true"
+                                    />
+
+
+                            <h:outputText value="Categoria:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.comercio.categoria}"
+                                            completeMethod="#{dataService.completeTextCategoria}" required="true"
+                                            var="acob" itemLabel="#{acob.nombre}" itemValue="#{acob}"
+                                            converter="categoriaConverter" forceSelection="true"
+                                    />
+
+                            <h:outputText value="Telefonos:"/>
+                            <p:dataList value="#{homeBean.comercio.telefonos}" var="obj" type="ordered" id="telDl">
+                                <f:facet name="header">
+                                    <p:inputText value="#{homeBean.dataStr}"/>
+                                    <p:commandButton value="Agregar" actionListener="#{homeBean.addTel()}"
+                                                     update="telDl" process="@this telDl"/>
+                                </f:facet>
+
+                                <h:outputText value="#{obj}" style="display:inline-block"/>
+                                <p:commandLink update="telDl" actionListener="#{homeBean.removeTel(obj)}"
+                                               process="@this telDl" title="Quitar Tel"
+                                               styleClass="fa fa-close"
+                                               style="padding-left: 10px;"/>
+
+                            </p:dataList>
+
+
+                            <h:outputText value="Tags:"/>
+                            <p:dataList value="#{homeBean.comercio.tags}" var="obj" type="ordered" id="tagDl">
+
+                                <f:facet name="header">
+                                    <p:inputText value="#{homeBean.dataStr}"/>
+                                    <p:commandButton value="Agregar" actionListener="#{homeBean.addTag()}"
+                                                     update="tagDl" process="@this tagDl"/>
+                                </f:facet>
+
+                                <h:outputText value="#{obj}" style="display:inline-block"/>
+                                <p:commandLink update="tagDl" actionListener="#{homeBean.removeTag(obj)}"
+                                               process="@this tagDl" title="Quitar Tag"
+                                               styleClass="fa fa-close"
+                                               style="padding-left: 10px;"/>
+                            </p:dataList>
+
+                            <h:outputText value="Logo: " />
+                            <p:graphicImage url="#{homeBean.comercio.img}" width="250" rendered="#{homeBean.uploadedFile!=null}"/>
+
+                            <p:fileUpload fileUploadListener="#{homeBean.handleFileUpload}" mode="advanced" dragDropSupport="false" auto="true" label="Cargar Logo" rendered="#{homeBean.uploadedFile==null}"
+                                          process="nuevoComercio"        update="nuevoComercio"		  sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Comercio"
+                                             actionListener="#{homeBean.guardarComercio}"/>
+
+
+                        </p:panelGrid>
+
+
+                        <p:panel header="Administrar Banners" style="margin-bottom:20px">
+                            <p:dataTable var="obj3" value="#{dataService.bannerList}">
+                                <p:column headerText="Banner">
+                                    <p:graphicImage url="#{obj3.img}" width="64" height="64" />
+
+                                </p:column>
+
+                                <p:column headerText="Banner Resp">
+                                    <p:graphicImage url="#{obj3.imgResp}" width="64" height="64"  />
+
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj3.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Peso">
+                                    <h:outputText value="#{obj3.peso}"/>
+                                </p:column>
+
+
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{obj3.categoria.nombre}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj3)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Banner"
+                                                     actionListener="#{homeBean.nuevoBanner()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.banner != null}" id="nuevoBanner">
+                            <f:facet name="header">
+                                Nuevo Banner
+                            </f:facet>
+
+                            <h:outputText value="Banner:"/>
+                            <p:inputText value="#{homeBean.banner.nombre}"/>
+
+                            <h:outputText value="Orden:"/>
+                            <p:inputText value="#{homeBean.banner.peso}"/>
+
+
+
+
+                            <h:outputText value="Categoria:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.banner.categoria}"
+                                            completeMethod="#{dataService.completeTextCategoria}" required="true"
+                                            var="acob" itemLabel="#{acob.nombre}" itemValue="#{acob}"
+                                            converter="categoriaConverter" forceSelection="true"
+                                    />
+
+
+                            <h:outputText value="Banner: " />
+                            <p:graphicImage url="#{homeBean.banner.img}" width="250" rendered="#{homeBean.banner.img !=null}"/>
+
+                            <p:fileUpload fileUploadListener="#{homeBean.handleFileUpload}" mode="advanced" dragDropSupport="false" auto="true" label="Cargar Banner" rendered="#{homeBean.banner.img ==null}"
+                                          process="nuevoBanner"        update="nuevoBanner"		  sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+                            <h:outputText value="Banner Resp: " />
+                            <p:graphicImage url="#{homeBean.banner.imgResp}" width="250" rendered="#{homeBean.banner.imgResp!= null}"/>
+
+                            <p:fileUpload fileUploadListener="#{homeBean.handleFileUpload2}" mode="advanced" dragDropSupport="false" auto="true" label="Cargar Banner Resp" rendered="#{homeBean.banner.imgResp == null}"
+                                          process="nuevoBanner"        update="nuevoBanner"		  sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Banner"
+                                             actionListener="#{homeBean.guardarBanner}"/>
+
+
+                        </p:panelGrid>
+
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

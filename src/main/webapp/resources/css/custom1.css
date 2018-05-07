@@ -1,0 +1,26 @@
+
+.wrapper .footer {
+
+    height: 64px;
+
+}
+
+.ft_img {
+    margin: 0;
+    text-align: right;
+    height: 50px;
+
+}
+
+
+
+#login-wrapper #login-container
+{
+    height: 300px;
+}
+
+.dw-column
+{
+    width:32px;
+    text-align: center;
+}

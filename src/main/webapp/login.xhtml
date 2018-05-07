@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>PideADomicilio V1</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+
+</h:head>
+
+<h:body styleClass="login-body">
+    <h:form id="login">
+
+        <p:growl id="messages" showDetail="false" autoUpdate="true" closable="true" sticky="false"/>
+
+
+        <pe:blockUI widgetVar="block-ui">
+            <h:panelGrid columns="2">
+                <h:graphicImage library="images" name="loading.gif"
+                                styleClass="ajax-img"/>
+
+            </h:panelGrid>
+        </pe:blockUI>
+
+        <div id="login-wrapper">
+            <p:graphicImage name="images/7monos.png" library="" height="100"/>
+
+            <div id="login-container">
+                <span class="title">Inicio de sesion</span>
+
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12">
+                        <p:inputText placeholder="Username" value="#{credentials.username}"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:password placeholder="Password" feedback="false" value="#{credentials.password}"/>
+                    </div>
+
+
+                    <div class="ui-g-12">
+                        <p:commandButton value="Login" icon="fa fa-check" action="#{currentUserManager.login}"
+                                         onstart="PF('block-ui').block()" oncomplete="PF('block-ui').unblock();"
+                                />
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-footer">PideADomicilio V1</div>
+        </div>
+
+    </h:form>
+    <h:outputStylesheet name="css/layout.css" library="omega-layout"/>
+    <h:outputStylesheet name="custom1.css" library="css" />
+
+</h:body>
+
+</html>

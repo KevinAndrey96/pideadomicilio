@@ -1,0 +1,94 @@
+<pretty-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="index">
+        <pattern value="/" />
+        <view-id value="/index.xhtml" />
+    </url-mapping>
+
+
+    <url-mapping id="main">
+        <pattern value="/main" />
+        <view-id value="/main.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="denied">
+        <pattern value="/denied" />
+        <view-id value="/access.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="404">
+        <pattern value="/404" />
+        <view-id value="/404.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="error">
+        <pattern value="/error" />
+        <view-id value="/error.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/login.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="categorias">
+        <pattern value="/categorias" />
+        <view-id value="/categorias.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="ciudades">
+        <pattern value="/ciudades" />
+        <view-id value="/ciudades.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="comercios">
+        <pattern value="/comercios" />
+        <view-id value="/comercios.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="zonas">
+        <pattern value="/zonas" />
+        <view-id value="/zonas.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="banners">
+        <pattern value="/banners" />
+        <view-id value="/banners.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="reporteBusquedaComercio">
+        <pattern value="/reporteBusquedaComercio" />
+        <view-id value="/reporteBusquedaComercio.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="reporteComercio">
+        <pattern value="/reporteComercio" />
+        <view-id value="/reporteComercio.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="reporteZonas">
+        <pattern value="/reporteZonas" />
+        <view-id value="/reporteZonas.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="reporteCategorias">
+        <pattern value="/reporteCategorias" />
+        <view-id value="/reporteCategorias.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="usuarios">
+        <pattern value="/usuarios" />
+        <view-id value="/usuarios.xhtml" />
+    </url-mapping>
+
+
+    <url-mapping id="contactanos">
+        <pattern value="/contactanos" />
+        <view-id value="/contactanos.xhtml" />
+    </url-mapping>
+
+
+</pretty-config>

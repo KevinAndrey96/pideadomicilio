@@ -1,0 +1,32 @@
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="mongo-ogm" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <class>com.infinitec.pideadomicilio.model.entity.Comercio</class>
+        <class>com.infinitec.pideadomicilio.model.entity.Ciudad</class>
+        <class>com.infinitec.pideadomicilio.model.entity.Zona</class>
+        <class>com.infinitec.pideadomicilio.model.entity.Categoria</class>
+        <class>com.infinitec.pideadomicilio.model.entity.Banner</class>
+        <class>com.infinitec.pideadomicilio.model.entity.Evento</class>
+        <class>com.infinitec.pideadomicilio.model.entity.User</class>
+
+
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.transaction.jta.platform"
+                      value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+            <property name="hibernate.ogm.datastore.database" value="pedidosadomicilio"/>
+            <property name="hibernate.ogm.datastore.host" value="localhost"/>
+            <property name="hibernate.ogm.datastore.create_database" value="true"/>
+
+            <property name="hibernate.ogm.datastore.provider" value="MONGODB"/>
+            <!--
+            <property name="hibernate.ogm.datastore.username" value="pedidosadomicilio"/>
+            <property name="hibernate.ogm.datastore.password" value="pedidosadomicilio"/>
+            -->
+
+        </properties>
+    </persistence-unit>
+</persistence>

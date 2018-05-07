@@ -1,0 +1,37 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="topbar clearfix">
+        <a id="omega-menu-button" href="#">
+            <span class="fa fa-bars"></span>
+        </a>
+
+        <span class="topbar-title"><ui:insert name="title"></ui:insert></span>
+
+        <a id="options-menu-button" href="#">
+            <span class="fa fa-ellipsis-h"></span>
+        </a>
+
+        <div id="topbar-icons" class="animated">
+
+
+            <a href="#" id="profile-button-1" class="profile-button">
+                <span class="topbar-item-text">User</span>
+                <span class="topbar-icon fa fa-user"></span>
+            </a>
+
+
+                <p:commandLink
+                        actionListener="#{currentUserManager.logout}">
+                    <span class="topbar-item-text">User</span>
+                    <span class="topbar-icon fa fa-sign-out"></span>
+
+                </p:commandLink>
+
+        </div>
+
+    </div>
+
+</ui:composition>

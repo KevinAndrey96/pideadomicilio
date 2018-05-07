@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+                        <p:commandButton update="form" icon="ui-icon-add" value="Generar Resumen"
+                                         actionListener="#{reportBean.reportZonas()}"/>
+
+
+                        <p:panel header="Reporte Zonas" style="margin-bottom:20px">
+                            <p:dataTable var="obj" value="#{reportBean.resumenZonas}"  paginator="true" rows="30" id="dt" filteredValue="#{reportBean.filteredZona}">
+                                <p:column headerText="Comercio" sortBy="#{obj.comercio}">
+                                    <h:outputText value="#{obj.comercio.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Tipo Busqueda">
+                                    <h:outputText value="#{obj.tipo}"/>
+                                </p:column>
+
+                                <p:column headerText="Busqueda" filterBy="#{obj.busqueda}">
+                                    <h:outputText value="#{obj.busqueda}"/>
+                                </p:column>
+
+                                <p:column headerText="Hits"  sortBy="#{obj.cantidad}">
+                                    <h:outputText value="#{obj.cantidad}"/>
+                                </p:column>
+
+
+                            </p:dataTable>
+                        </p:panel>
+
+                        <h:commandLink value="Descargar Reporte">
+
+                            <p:dataExporter type="xlsx" target="dt" fileName="zonas" pageOnly="false"/>
+                        </h:commandLink>
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

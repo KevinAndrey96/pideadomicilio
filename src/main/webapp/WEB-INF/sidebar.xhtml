@@ -1,0 +1,80 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:po="http://primefaces.org/omega">
+
+    <div class="sidebar">
+        <div class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="logo">
+                    <p:graphicImage name="images/7monos.png" library="" width="200"/>
+                </div>
+
+                <div class="profile">
+                    <a id="profile-button" href="#" class="profile-button">
+                        <span class="username">#{currentUserManager.currentAccount.username}</span>
+                        <i class="fa fa-fw fa-cog"></i>
+                    </a>
+                    <ul>
+
+                        <li><p:commandLink
+                                actionListener="#{currentUserManager.logout}">
+                            <i class="fa fa-fw fa-sign-out"></i><span>Logout</span>
+                        </p:commandLink></li>
+                    </ul>
+                </div>
+
+                <div class="menu">
+                    <h:form>
+                        <po:menu>
+
+
+                            <p:submenu id="om_sm1" label="Opciones" icon="fa fa-sign-in">
+                                <p:menuitem id="om_lnk111" value="Inicio" icon="fa fa-sign-in" outcome="main"/>
+
+                                <p:menuitem id="om_lnk117" value="Usuarios" icon="fa fa-sign-in"
+                                            outcome="usuarios"/>
+
+                                <p:menuitem id="om_lnk112" value="Categorias" icon="fa fa-sign-in"
+                                            outcome="categorias"/>
+
+                                <p:menuitem id="om_lnk113" value="Ciudades" icon="fa fa-sign-in"
+                                            outcome="ciudades"/>
+
+                                <p:menuitem id="om_lnk114" value="Zonas" icon="fa fa-sign-in"
+                                            outcome="zonas"/>
+
+
+                                <p:menuitem id="om_lnk115" value="Comercios" icon="fa fa-sign-in"
+                                            outcome="comercios"/>
+
+                                <p:menuitem id="om_lnk116" value="Banners" icon="fa fa-sign-in"
+                                            outcome="banners"/>
+
+                            </p:submenu>
+
+                            <p:submenu id="om_sm2" label="Reportes" icon="fa fa-sign-in">
+                                <p:menuitem id="om_lnk21" value="Reporte Busqueda Comercios" icon="fa fa-sign-in"
+                                            outcome="reporteBusquedaComercio"/>
+                                <p:menuitem id="om_lnk22" value="Reporte Comercios" icon="fa fa-sign-in"
+                                            outcome="reporteComercio"/>
+                                <p:menuitem id="om_lnk23" value="Reporte Zonas" icon="fa fa-sign-in"
+                                            outcome="reporteZonas"/>
+
+                                <p:menuitem id="om_lnk24" value="Reporte Categorias" icon="fa fa-sign-in"
+                                            outcome="reporteCategorias"/>
+
+
+                            </p:submenu>
+
+
+                        </po:menu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ui:composition>

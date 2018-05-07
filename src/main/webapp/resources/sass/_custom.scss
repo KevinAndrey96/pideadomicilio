@@ -1,0 +1,17 @@
+/* CUSTOM */
+
+.ajax-img
+{
+    margin-right: 12px; vertical-align: middle; width: 32px;height:32px;text-align: center;margin:auto;
+}
+
+.blockUI
+{
+    position: fixed !important;
+    top: 50%!important;
+    left: 50%!important;
+    margin-right: -50%!important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}

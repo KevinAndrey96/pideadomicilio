@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form id="form">
+
+
+
+
+                        <p:panel header="Administrar Banners" style="margin-bottom:20px">
+                            <p:dataTable var="obj3" value="#{dataService.bannerList}">
+                                <p:column headerText="Banner Pagina Web">
+                                    <p:graphicImage url="#{obj3.img}" width="64" height="64" />
+
+                                </p:column>
+
+                                <p:column headerText="Banner Pagina Celular">
+                                    <p:graphicImage url="#{obj3.imgResp}" width="64" height="64"  />
+
+                                </p:column>
+
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{obj3.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Peso">
+                                    <h:outputText value="#{obj3.peso}"/>
+                                </p:column>
+
+
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{obj3.categoria.nombre}"/>
+                                </p:column>
+
+
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.editBanners(obj3)}"
+                                                     icon="ui-icon-pencil" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="form" actionListener="#{homeBean.remove(obj3)}"
+                                                     icon="ui-icon-trash" title="View">
+
+                                    </p:commandButton>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                    <p:commandButton update="form" icon="ui-icon-add" value="Agregar Banner"
+                                                     actionListener="#{homeBean.nuevoBanner()}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+
+                        <p:panelGrid columns="2" rendered="#{homeBean.banner != null}" id="nuevoBanner">
+                            <f:facet name="header">
+                                Nuevo Banner
+                            </f:facet>
+
+                            <h:outputText value="Banner:"/>
+                            <p:inputText value="#{homeBean.banner.nombre}"/>
+
+                            <h:outputText value="Orden:"/>
+                            <p:inputText value="#{homeBean.banner.peso}"/>
+
+
+
+
+                            <h:outputText value="Categoria:"/>
+                            <p:autoComplete dropdown="true" value="#{homeBean.banner.categoria}"
+                                            completeMethod="#{dataService.completeTextCategoria}" required="true"
+                                            var="acob" itemLabel="#{acob.nombre}" itemValue="#{acob}"
+                                            converter="categoriaConverter" forceSelection="true"
+                                    />
+
+
+                            <h:outputText value="Banner Pagina Web Cargado: " />
+                            <p:graphicImage url="#{homeBean.banner.img}" height="250" />
+
+                            <h:outputText value="Cargar Banner Pagina Web: " />
+                            <p:fileUpload fileUploadListener="#{homeBean.handleFileUpload}" mode="advanced" dragDropSupport="false" auto="true" label="Cargar Banner Pagina Web"
+                                          process="nuevoBanner"        update="nuevoBanner"		  sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+                            <h:outputText value="Banner Pagina Celular Cargado: " />
+                            <p:graphicImage url="#{homeBean.banner.imgResp}" height="250" />
+
+                            <h:outputText value="Cargar Banner Pagina Celular: " />
+                            <p:fileUpload fileUploadListener="#{homeBean.handleFileUpload2}" mode="advanced" dragDropSupport="false" auto="true" label="Cargar Banner Pagina Celular"
+                                          process="nuevoBanner"        update="nuevoBanner"		  sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+
+                            <p:spacer/>
+                            <p:commandButton update="form" icon="ui-icon-add" value="Agregar Banner"
+                                             actionListener="#{homeBean.guardarBanner}"/>
+
+
+                        </p:panelGrid>
+
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
